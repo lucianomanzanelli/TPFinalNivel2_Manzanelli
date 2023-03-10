@@ -16,7 +16,7 @@ namespace presentacion
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Comercio());
+            Application.Run(new Catalogo());
         }
     }
 }
