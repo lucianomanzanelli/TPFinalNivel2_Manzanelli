@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Net.NetworkInformation;
 
 namespace presentacion
 {
@@ -44,6 +45,56 @@ namespace presentacion
                 MessageBox.Show(ex.ToString());
             }
 
+        }
+
+        private void cargarImagen(string imagen)
+        {
+            try
+            {
+                //verificar si hay conexion a internet
+                if (NetworkInterface.GetIsNetworkAvailable())
+                {
+                    pbArticulo.Load(imagen);
+                }
+                else
+                    //pbArticulo.Load();
+                    MessageBox.Show("no hay conexion a internet");
+                
+            }
+            catch (Exception)
+            {
+                //verificar si hay conexion a internet
+                if (NetworkInterface.GetIsNetworkAvailable())
+                {
+                    pbArticulo.Load("https://media.istockphoto.com/id/1147544807/vector/thumbnail-image-vector-graphic.jpg?s=612x612&w=0&k=20&c=rnCKVbdxqkjlcs3xH87-9gocETqpspHFXu5dIGB4wuM=");
+                }
+                else
+                    MessageBox.Show("no hay conexion a internet");
+            }
+        }
+
+        private void dgvArticulos_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dgvArticulos.CurrentRow != null)
+            {
+                Articulo seleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
+                cargarImagen(seleccionado.ImagenUrl);
+            }
+        }
+
+        private void btnSalir_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void btnAgregar_Click(object sender, EventArgs e)
+        {
+            frmAltaArticulo alta = new frmAltaArticulo();
+            alta.ShowDialog();
+
+            /* luego de confirmar el alta de un nuevo articulo
+            actualizo nuevamente la grilla para ver el nuevo articulo */
+            cargar();
         }
     }
 }
