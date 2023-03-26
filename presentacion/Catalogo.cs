@@ -37,7 +37,7 @@ namespace presentacion
                 dgvArticulos.DataSource = listaArticulo;
                 pbArticulo.Load(listaArticulo[0].ImagenUrl);
 
-
+                ocultarColumnas();
             }
             catch (Exception ex)
             {
@@ -57,7 +57,6 @@ namespace presentacion
                     pbArticulo.Load(imagen);
                 }
                 else
-                    //pbArticulo.Load();
                     MessageBox.Show("no hay conexion a internet");
                 
             }
@@ -80,6 +79,15 @@ namespace presentacion
                 Articulo seleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
                 cargarImagen(seleccionado.ImagenUrl);
             }
+        }
+
+        private void ocultarColumnas()
+        {
+            dgvArticulos.Columns["Id"].Visible = false;
+            dgvArticulos.Columns["Descripcion"].Visible = false;
+            dgvArticulos.Columns["ImagenUrl"].Visible = false;
+            dgvArticulos.Columns["Marca"].Visible = false;
+
         }
 
         private void btnSalir_Click(object sender, EventArgs e)
@@ -108,6 +116,15 @@ namespace presentacion
 
 
 
+        }
+
+        private void btnDetalle_Click(object sender, EventArgs e)
+        {
+            Articulo seleccionado;
+            seleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
+
+            frmDetalle detalle = new frmDetalle(seleccionado);
+            detalle.ShowDialog();
         }
     }
 }

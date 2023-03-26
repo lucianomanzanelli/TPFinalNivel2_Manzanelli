@@ -21,12 +21,15 @@ namespace presentacion
         public frmAltaArticulo()
         {
             InitializeComponent();
+            lblTitulo.Text = "Alta de Artículo";
         }
 
         public frmAltaArticulo(Articulo articulo)
         {
             InitializeComponent();
             this.articulo = articulo;
+            lblTitulo.Text = "Modificar Artículo";
+            
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
