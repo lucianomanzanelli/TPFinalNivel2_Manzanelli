@@ -14,9 +14,19 @@ namespace presentacion
 {
     public partial class frmAltaArticulo : Form
     {
+
+        private Articulo articulo = null;
+
+
         public frmAltaArticulo()
         {
             InitializeComponent();
+        }
+
+        public frmAltaArticulo(Articulo articulo)
+        {
+            InitializeComponent();
+            this.articulo = articulo;
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
@@ -38,6 +48,22 @@ namespace presentacion
                 cboMarca.DataSource = marcaNegocio.listar();
                 cboMarca.ValueMember = "Id";
                 cboMarca.DisplayMember = "Descripcion";
+
+                if (articulo != null)
+                {
+                    txtCodigo.Text = articulo.Codigo.ToString();
+                    txtNombre.Text = articulo.Nombre;
+                    txtDescripcion.Text = articulo.Descripcion;
+
+                    txtUrl.Text = articulo.ImagenUrl;
+                    cargarImagen(articulo.ImagenUrl);
+
+                    txtPrecio.Text = articulo.Precio.ToString();
+                    cboCategoria.SelectedValue = articulo.Categoria.Id;
+                    cboMarca.SelectedValue = articulo.Marca.Id;
+                }
+
+
             }
             catch (Exception ex)
             {
@@ -45,10 +71,7 @@ namespace presentacion
                 MessageBox.Show(ex.ToString());
             }
 
-
-
         }
-
 
         private void cargarImagen(string imagen)
         {
@@ -68,14 +91,16 @@ namespace presentacion
         }
 
 
-
         private void btnAceptar_Click(object sender, EventArgs e)
         {
             ArticuloNegocio negocio = new ArticuloNegocio();
             try
             {
-                Articulo articulo = new Articulo();
-
+                if (articulo == null)
+                {
+                    articulo = new Articulo();
+                }
+                
                 articulo.Codigo = txtCodigo.Text;
                 articulo.Nombre = txtNombre.Text;
                 articulo.Descripcion = txtDescripcion.Text;
@@ -84,14 +109,25 @@ namespace presentacion
                 articulo.Categoria = (Categoria)cboCategoria.SelectedItem;
                 articulo.Marca = (Marca)cboMarca.SelectedItem;
 
-                negocio.agregar(articulo);
-                MessageBox.Show("Agregado con exito!");
+                if (articulo.Id != 0)
+                {
+                    negocio.modificar(articulo);
+                    MessageBox.Show("Modificado con exito!");
+                }
+                else
+                {
+                    negocio.agregar(articulo);
+                    MessageBox.Show("Agregado con exito!");
+                }
+
+                //una vez guardados los cambios cierra el formulario
+                Close();
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw;
+                MessageBox.Show(ex.ToString());
             }
 
         }

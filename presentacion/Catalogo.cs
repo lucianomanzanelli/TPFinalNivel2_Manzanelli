@@ -96,5 +96,18 @@ namespace presentacion
             actualizo nuevamente la grilla para ver el nuevo articulo */
             cargar();
         }
+
+        private void btnModificar_Click(object sender, EventArgs e)
+        {
+            Articulo seleccionado;
+            seleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
+
+            frmAltaArticulo modificar = new frmAltaArticulo(seleccionado);
+            modificar.ShowDialog();
+            cargar();
+
+
+
+        }
     }
 }
