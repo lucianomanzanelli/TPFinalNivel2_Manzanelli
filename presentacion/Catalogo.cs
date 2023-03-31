@@ -181,6 +181,8 @@ namespace presentacion
                 lblFiltroError.Text = "Seleccione el criterio para filtrar";
                 return true;
             }
+            else
+                lblFiltroError.Text = "";
 
             return false;
         }
