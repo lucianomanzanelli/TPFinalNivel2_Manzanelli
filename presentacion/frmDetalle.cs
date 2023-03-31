@@ -41,7 +41,7 @@ namespace presentacion
                     lblNombre.Text = articulo.Nombre;
                     lblDescripcion.Text = articulo.Descripcion;
                     linkLblUrl.Text = articulo.ImagenUrl;
-                    lblPrecio.Text = articulo.Precio.ToString();
+                    lblPrecio.Text = articulo.Precio.ToString("$0");
                     lblCategoria.Text = articulo.Categoria.Descripcion;
                     lblMarca.Text = articulo.Marca.Descripcion;
                 }
@@ -60,17 +60,15 @@ namespace presentacion
             }
             catch (Exception)
             {
-                MessageBox.Show("No podés abrir este link.");
+                MessageBox.Show("No podés abrir este link.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
         private void VisitLink()
         {
-            // Change the color of the link text by setting LinkVisited
-            // to true.
+            // Cambia el color del link para marcarlo como visitado
             linkLblUrl.LinkVisited = true;
-            //Call the Process.Start method to open the default browser
-            //with a URL:
+            //Abre el navegador predeterminado con la URL
             string url = articulo.ImagenUrl;
             System.Diagnostics.Process.Start(url);
         }
