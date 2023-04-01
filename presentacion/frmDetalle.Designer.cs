@@ -50,7 +50,7 @@
             // 
             // btnVolver
             // 
-            this.btnVolver.Location = new System.Drawing.Point(207, 451);
+            this.btnVolver.Location = new System.Drawing.Point(186, 455);
             this.btnVolver.Name = "btnVolver";
             this.btnVolver.Size = new System.Drawing.Size(75, 26);
             this.btnVolver.TabIndex = 0;
@@ -173,7 +173,7 @@
             this.lblDescripcion.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDescripcion.Location = new System.Drawing.Point(153, 309);
             this.lblDescripcion.Name = "lblDescripcion";
-            this.lblDescripcion.Size = new System.Drawing.Size(293, 44);
+            this.lblDescripcion.Size = new System.Drawing.Size(293, 58);
             this.lblDescripcion.TabIndex = 12;
             this.lblDescripcion.Text = "Descripción";
             // 
@@ -212,7 +212,7 @@
             this.linkLblUrl.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.linkLblUrl.Location = new System.Drawing.Point(153, 382);
             this.linkLblUrl.Name = "linkLblUrl";
-            this.linkLblUrl.Size = new System.Drawing.Size(293, 44);
+            this.linkLblUrl.Size = new System.Drawing.Size(293, 58);
             this.linkLblUrl.TabIndex = 17;
             this.linkLblUrl.TabStop = true;
             this.linkLblUrl.Text = "URL de la imágen";
@@ -222,7 +222,7 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(93, 18);
+            this.label9.Location = new System.Drawing.Point(78, 18);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(290, 24);
             this.label9.TabIndex = 18;

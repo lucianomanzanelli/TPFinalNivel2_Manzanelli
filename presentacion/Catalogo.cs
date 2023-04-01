@@ -1,15 +1,8 @@
-﻿using negocio;
-using dominio;
+﻿using dominio;
+using negocio;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Net.NetworkInformation;
 
 namespace presentacion
 {
@@ -41,12 +34,13 @@ namespace presentacion
                 listaArticulo = negocio.listar();
                 dgvArticulos.DataSource = listaArticulo;
                 pbArticulo.Load(listaArticulo[0].ImagenUrl);
+                dgvArticulos.Columns["Precio"].DefaultCellStyle.Format = "N2";
+
 
                 ocultarColumnas();
             }
             catch (Exception ex)
             {
-
                 MessageBox.Show(ex.ToString());
             }
 
@@ -56,24 +50,12 @@ namespace presentacion
         {
             try
             {
-                //verificar si hay conexion a internet
-                if (NetworkInterface.GetIsNetworkAvailable())
-                {
-                    pbArticulo.Load(imagen);
-                }
-                else
-                    MessageBox.Show("no hay conexion a internet");
-                
+                pbArticulo.Load(imagen);
+
             }
             catch (Exception)
             {
-                //verificar si hay conexion a internet
-                if (NetworkInterface.GetIsNetworkAvailable())
-                {
-                    pbArticulo.Load("https://media.istockphoto.com/id/1147544807/vector/thumbnail-image-vector-graphic.jpg?s=612x612&w=0&k=20&c=rnCKVbdxqkjlcs3xH87-9gocETqpspHFXu5dIGB4wuM=");
-                }
-                else
-                    MessageBox.Show("no hay conexion a internet");
+                pbArticulo.Load("https://media.istockphoto.com/id/1147544807/vector/thumbnail-image-vector-graphic.jpg?s=612x612&w=0&k=20&c=rnCKVbdxqkjlcs3xH87-9gocETqpspHFXu5dIGB4wuM=");
             }
         }
 
@@ -138,19 +120,16 @@ namespace presentacion
 
             try
             {
-                if (MessageBox.Show("Seguro que quieres eliminar este artículo?", "Eliminar", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                if (MessageBox.Show("¿Seguro que quieres eliminar este artículo?", "Eliminar", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
                 {
                     seleccionado = (Articulo)dgvArticulos.CurrentRow.DataBoundItem;
 
                     negocio.eliminar(seleccionado.Id);
 
-                    MessageBox.Show("Eliminado con exito!");
+                    MessageBox.Show("¡Eliminado con exito!", "Eliminado", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     cargar();
                 }
-                else
-                    MessageBox.Show("No se pudo eliminar", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-
-
+                
             }
             catch (Exception ex)
             {
@@ -163,7 +142,7 @@ namespace presentacion
             List<Articulo> listaFiltrada;
             string filtro = txtFiltroRapido.Text;
 
-            listaFiltrada = listaArticulo.FindAll(x => x.Nombre.ToUpper().Contains(filtro.ToUpper()) 
+            listaFiltrada = listaArticulo.FindAll(x => x.Nombre.ToUpper().Contains(filtro.ToUpper())
                             || x.Descripcion.ToUpper().Contains(filtro.ToUpper())
                             || x.Marca.Descripcion.ToUpper().Contains(filtro.ToUpper())
                             || x.Categoria.Descripcion.ToUpper().Contains(filtro.ToUpper()));
@@ -194,15 +173,17 @@ namespace presentacion
         {
             if (cboCampo.SelectedIndex < 0)
             {
-                MessageBox.Show("Por favor seleccione el campo para filtrar");
+                lblFiltroError.Text = "Seleccione el campo para filtrar";
                 return true;
             }
             if (cboCriterio.SelectedIndex < 0)
             {
-                MessageBox.Show("Por favor seleccione el criterio para filtrar");
+                lblFiltroError.Text = "Seleccione el criterio para filtrar";
                 return true;
             }
-            
+            else
+                lblFiltroError.Text = "";
+
             return false;
         }
 
@@ -222,7 +203,6 @@ namespace presentacion
 
                 dgvArticulos.DataSource = negocio.filtrar(campo, criterio, filtro);
 
-                
             }
             catch (Exception ex)
             {
@@ -239,5 +219,7 @@ namespace presentacion
 
             cargar();
         }
+
+        
     }
 }

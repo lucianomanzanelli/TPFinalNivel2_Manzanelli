@@ -48,6 +48,10 @@
             this.btnAceptar = new System.Windows.Forms.Button();
             this.btnCancelar = new System.Windows.Forms.Button();
             this.lblTitulo = new System.Windows.Forms.Label();
+            this.lblCodigoError = new System.Windows.Forms.Label();
+            this.lblNombreError = new System.Windows.Forms.Label();
+            this.lblPrecioError = new System.Windows.Forms.Label();
+            this.lblError = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pbArticulo)).BeginInit();
             this.SuspendLayout();
             // 
@@ -207,11 +211,51 @@
             this.lblTitulo.TabIndex = 17;
             this.lblTitulo.Text = "Alta de Articulo";
             // 
+            // lblCodigoError
+            // 
+            this.lblCodigoError.AutoSize = true;
+            this.lblCodigoError.ForeColor = System.Drawing.Color.Red;
+            this.lblCodigoError.Location = new System.Drawing.Point(104, 87);
+            this.lblCodigoError.Name = "lblCodigoError";
+            this.lblCodigoError.Size = new System.Drawing.Size(0, 13);
+            this.lblCodigoError.TabIndex = 18;
+            // 
+            // lblNombreError
+            // 
+            this.lblNombreError.AutoSize = true;
+            this.lblNombreError.ForeColor = System.Drawing.Color.Red;
+            this.lblNombreError.Location = new System.Drawing.Point(104, 134);
+            this.lblNombreError.Name = "lblNombreError";
+            this.lblNombreError.Size = new System.Drawing.Size(0, 13);
+            this.lblNombreError.TabIndex = 19;
+            // 
+            // lblPrecioError
+            // 
+            this.lblPrecioError.AutoSize = true;
+            this.lblPrecioError.ForeColor = System.Drawing.Color.Red;
+            this.lblPrecioError.Location = new System.Drawing.Point(104, 276);
+            this.lblPrecioError.Name = "lblPrecioError";
+            this.lblPrecioError.Size = new System.Drawing.Size(0, 13);
+            this.lblPrecioError.TabIndex = 22;
+            // 
+            // lblError
+            // 
+            this.lblError.AutoSize = true;
+            this.lblError.ForeColor = System.Drawing.Color.Red;
+            this.lblError.Location = new System.Drawing.Point(396, 376);
+            this.lblError.Name = "lblError";
+            this.lblError.Size = new System.Drawing.Size(0, 13);
+            this.lblError.TabIndex = 23;
+            // 
             // frmAltaArticulo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(694, 403);
+            this.Controls.Add(this.lblError);
+            this.Controls.Add(this.lblPrecioError);
+            this.Controls.Add(this.lblNombreError);
+            this.Controls.Add(this.lblCodigoError);
             this.Controls.Add(this.lblTitulo);
             this.Controls.Add(this.btnCancelar);
             this.Controls.Add(this.btnAceptar);
@@ -260,6 +304,10 @@
         private System.Windows.Forms.Button btnAceptar;
         private System.Windows.Forms.Button btnCancelar;
         private System.Windows.Forms.Label lblTitulo;
+        private System.Windows.Forms.Label lblCodigoError;
+        private System.Windows.Forms.Label lblNombreError;
+        private System.Windows.Forms.Label lblPrecioError;
+        private System.Windows.Forms.Label lblError;
     }
 
 }

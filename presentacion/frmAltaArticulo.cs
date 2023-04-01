@@ -66,11 +66,9 @@ namespace presentacion
                     cboMarca.SelectedValue = articulo.Marca.Id;
                 }
 
-
             }
             catch (Exception ex)
             {
-
                 MessageBox.Show(ex.ToString());
             }
 
@@ -103,37 +101,100 @@ namespace presentacion
                 {
                     articulo = new Articulo();
                 }
+
+                if (!(txtCodigo.Text == ""))
+                {
+                    articulo.Codigo = txtCodigo.Text;
+                    lblCodigoError.Text = "";
+                }
+                else
+                    lblCodigoError.Text = "Debe ingresar un código";
+
+                if (!(txtNombre.Text == ""))
+                {
+                    articulo.Nombre = txtNombre.Text;
+                    lblNombreError.Text = "";
+                }
+                else
+                    lblNombreError.Text = "Debe ingresar el nombre";
+
                 
-                articulo.Codigo = txtCodigo.Text;
-                articulo.Nombre = txtNombre.Text;
                 articulo.Descripcion = txtDescripcion.Text;
                 articulo.ImagenUrl = txtUrl.Text;
-                articulo.Precio = Convert.ToDecimal(txtPrecio.Text);
-                articulo.Categoria = (Categoria)cboCategoria.SelectedItem;
-                articulo.Marca = (Marca)cboMarca.SelectedItem;
 
-                if (articulo.Id != 0)
+                bool resultado = false;
+                if (!(txtPrecio.Text == ""))
                 {
-                    negocio.modificar(articulo);
-                    MessageBox.Show("Modificado con exito!");
+                    
+                    decimal precio;
+                    if (decimal.TryParse(txtPrecio.Text, out precio))
+                    {
+                        articulo.Precio = precio;
+                        lblPrecioError.Text = "";
+                        resultado = true;
+                    }
+                    else
+                    {
+                        lblPrecioError.Text = "El precio debe ser un número válido";
+                        resultado = false;
+                    }
                 }
                 else
                 {
-                    negocio.agregar(articulo);
-                    MessageBox.Show("Agregado con exito!");
+                    resultado = false;
+                    lblPrecioError.Text = "Debe ingresar el precio";
                 }
 
-                //una vez guardados los cambios cierra el formulario
-                Close();
+
+                articulo.Categoria = (Categoria)cboCategoria.SelectedItem;
+                articulo.Marca = (Marca)cboMarca.SelectedItem;
+
+                
+                if (articulo.Id != 0)
+                {
+                    if (txtCodigo.Text == "" || txtNombre.Text == "" || resultado == false)
+                    {
+                        lblError.Text = "Debe completar los datos";
+                    }
+                    else
+                    {
+                        lblError.Text = "";
+
+                        negocio.modificar(articulo);
+                        MessageBox.Show("¡Modificado con exito!", "Modificado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        //una vez guardados los cambios cierra el formulario
+                        Close();
+                    }
+                }
+                else
+                {
+                    if (txtCodigo.Text == "" || txtNombre.Text == "" || resultado == false)
+                    {
+                        lblError.Text = "Debe completar los datos";
+                    }
+                    else
+                    {
+                        lblError.Text = "";
+
+                        negocio.agregar(articulo);
+                        MessageBox.Show("¡Agregado con exito!", "Agregado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                        //una vez guardados los cambios cierra el formulario
+                        Close();
+                    }
+                    
+                }
 
             }
             catch (Exception ex)
             {
-
                 MessageBox.Show(ex.ToString());
             }
 
         }
+
+        
 
         
     }
